@@ -21,7 +21,7 @@ results = parser.parse_args()
 key1=['simple_value','constant_value']
 key2=['store_true1','boolean_switch2']
 # d=dict(zip(key1,list1))
-if results.device_name=='nexus5k':
+if results.device_name=='pk5k':
 	list1=[results.store,results.store_const]
 	d=dict(zip(key1,list1))
 	print(d)
