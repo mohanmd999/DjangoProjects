@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from rest_framework.views import APIView
 from .serializers import *
 from rest_framework.response import Response
-from .models import Post
+# from .models import Post
 from rest_framework import generics
 from .parser_fun import *
 from django.contrib.auth.models import User
@@ -38,8 +38,8 @@ from rest_framework import viewsets
 
 class UserList(APIView):
 	def get(self,request):
-		queryset = User.objects.all()
-		serializer_class = GetUserSerializer(queryset,many=True)
+		queryset = Profile.objects.all()
+		serializer_class = GetProfileSerializer(queryset,many=True)
 		return Response(serializer_class.data)
 
 
@@ -107,3 +107,18 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
 def dashbord(request):
 	return render(request,'dashbord.html')
+
+
+
+from rest_framework.permissions import IsAuthenticated   
+
+from rest_framework.permissions import IsAuthenticated   
+
+class ChangePasswordView(APIView):
+       def patch(self, request):
+           serialized = ChangePasswordSerializer(data=request.data)
+           if serialized.is_valid():
+               serialized.save()
+               return Response("done")
+           else:
+               return Response(serialized.errors)

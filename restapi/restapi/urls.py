@@ -42,6 +42,9 @@ path('user/<int:pk>/',fun.user_detailes),
 
 path('users/', views.UserList.as_view()),
 path('userset/', views.UserViewSet.as_view()),
+path('setpassword/', views.ChangePasswordView.as_view()),
+    path(r'oauth/', include('social_django.urls', namespace='social')),  # <--
+
 
 # path('users/<int:pk>/', views.UserDetail.as_view()),
 ]

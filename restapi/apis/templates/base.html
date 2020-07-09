@@ -2,24 +2,43 @@
 <html>
 <head>
 	<title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                        {% load static%}
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+  
+
+ <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.min.css' %}">
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery-3.3.1.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#phone').DataTable();
+} );
+</script>
+
 </head>
 <body>
-
-
-        <table border="2" >
+        <table id="phone" class="table table-striped table-bordered" style="width:55%">
 <thead>
       <th>UserName</th>
-      <th></th>
+          <th>Number</th>
+
     <th>FullDetalies</th>
 
 </thead>
 
-
   <tbody>
     {% for i in list_data %}
     <tr>
-           <td>{{i.username}}</td>
-      <td><a href="/user/{{i.id}}/">Fulldetalies</a></td>
+           <td>{{i.user.username}}</td>
+            <td>{{i.phone}}</td>
+
+      <td><a href="/user/{{i.user.id}}/">Fulldetalies</a></td>
 
     </tr>
     {%endfor%}

@@ -32,7 +32,7 @@ class GetUserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('city', 'country')
+        fields = ('phone',)
         extra_kwargs = {'password': {'write_only': True}}
 
 
@@ -47,20 +47,13 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.save()
         Profile.objects.update_or_create(user=user,**profile_data)
         return user
-    # def create(self, validated_data):
-    # 	profile_data = validated_data.pop('profile')
-    # 	user = User.objects.create(**validated_data)
-    # 	Profile.objects.create(user=user, **profile_data)
-    # 	return user
+
 
     class Meta:
         model = User
         fields = ( 'username', 'password', 'email',  'profile')
         # extra_kwargs = {'password': {'write_only': True}}
         # context={'request': request}
-
-
-
 
 
 
@@ -71,5 +64,34 @@ class GetProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ( 'city',  'country',  'user')
+        fields = ( 'phone','user')
+
+from django.contrib.auth.password_validation import validate_password
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+    # turn text to hashed password
+
+    def create(self,validated_data):
+        print(validated_data)
+        user=User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+   # def create(self, validated_data):
+   #      user = User(**validated_data)
+   #      user.set_password(validated_data['password'])
+   #      user.save()
+   #      return user
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data['password'])
+        instance.save()
+        return instance
+
+    class Meta:
+        model = User
+        fields = ( 'password')
 
