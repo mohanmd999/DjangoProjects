@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+        <table border="2" >
+<thead>
+      <th>UserName</th>
+      <th></th>
+    <th>FullDetalies</th>
+
+</thead>
+
+
+  <tbody>
+    {% for i in list_data %}
+    <tr>
+           <td>{{i.username}}</td>
+      <td><a href="/user/{{i.id}}/">Fulldetalies</a></td>
+
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+</body>
+</html>

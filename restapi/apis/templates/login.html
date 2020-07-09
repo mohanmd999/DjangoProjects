@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+</head>
+<body>
+    <div>
+        
+            <section class="Latest-news">
+        <p> LOGIN HERE</p>
+    </section>
+
+    </div><br>
+<div class="login-form" >
+    <center>
+    	{{msg}}
+        <form method="POST">
+            {%csrf_token%}
+        <input type="text" placeholder="Enter UserName" size="15" name="username">
+        <br>
+        <input type="password" placeholder="Enter Password" size="15" name="password">
+        <br>
+        <input type="submit" value=" login" id="submit">
+
+    </form>
+
+</center>
+</div>
+
+</body>
+</html>

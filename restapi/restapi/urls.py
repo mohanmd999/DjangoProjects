@@ -1,34 +1,47 @@
 """restapi URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
+    https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
 from django.contrib import admin
-from rest_framework import  routers
+from django.urls import path
+from apis import views
+from apis import fun
+from django.conf.urls import include
 
-from api.views import CusromerViewSet ,ProfessionViewSet,DataSheetViewSet,DocumentViewSet,SnippetList,SnippetDetail
-router = routers.DefaultRouter()
-router.register(r'Customer', CusromerViewSet)
-router.register(r'Profession', ProfessionViewSet)
-router.register(r'DataSheet', DataSheetViewSet)
-router.register(r'Document', DocumentViewSet)
+from rest_framework.routers import DefaultRouter
 
+
+# router = DefaultRouter()
+# router.register('profile', views.UserProfileViewSet)
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url('api/', include(router.urls)),
-    url('snippets/$', SnippetList.as_view()),
-    url('snippets/([0-9]+)/', SnippetDetail.as_view()),
+    path('admin/', admin.site.urls),
+        # path('', include(router.urls)),
+        # path('create_post/',fun.list_fun),
+        # path('post_view/',fun.post_view),
+        # path('addview/',fun.addview),
+        path('user/all/',fun.All_User),
+        # path('user/<int:pk>/', views.UserDetail.as_view()),
+path('login_view/',views.login_view ),
+path('dashbord/',views.dashbord ),
+path('user/<int:pk>/',fun.user_detailes),
+    path('reg_view/',fun.reg_view),
+    path('reguser/',fun.addreg),
+    # path('createuser/', views.CreateUser.as_view()),
 
+path('users/', views.UserList.as_view()),
+path('userset/', views.UserViewSet.as_view()),
+
+# path('users/<int:pk>/', views.UserDetail.as_view()),
 ]

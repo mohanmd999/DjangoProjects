@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+
+        <table border="2" >
+<thead>
+      <th>UserName</th>
+    <th>email</th>
+    <th>city</th>
+        <th>Country</th>
+
+
+</thead>
+
+
+  <tbody>
+    {% for i in list_data %}
+    <tr>
+           <td>{{i.user.username}}</td>
+                      <td>{{i.user.email}}</td>
+           <td>{{i.city}}</td>
+                      <td>{{i.country}}</td>
+
+
+
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+</body>
+</html>
